@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      {% if g.user %}
+      <title>Messanger</title>
+      {% else %}
+      <title>Login</title>
+      {% endif %}
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
+    </head>
+    <body>
+
+      {% if g.user %}
+      <nav class="navbar navbar-light bg-light sticky-top navbar-expand-lg">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">WebSiteName</a>
+          </div>
+          <!-- Hamburger menu per lower screen. Responsive changes-->
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" \
+          aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+
+            <!-- Top-Nav bar links -->
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+              </ul>
+          </div>
+      </nav>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3" name="channels_container">
+            <nav id="left-nav">
+              <h3>Channels</h3>
+              <ul id="channels_list">
+                  <!--<li><a href='#' id="channel" class="nav-link" data-page="channel1">#general</a></li>-->
+                  <!--<li><a href='#' id="channel" class="nav-link" data-page="channel1">#channel1</a></li>-->
+                  <!--<li><a href='#' id="channel" class="nav-link" data-page="channel1">#channel2</a></li>-->
+              </ul>
+              <form class="form-group" id="create_channel">
+                <input type="text" id="create_channel_input" name="create_channel_input" placeholder="Channel name">
+                <input id="create_channel_btn" name="create_channel_btn" type="submit">
+              </form>
+            </nav>
+          </div>
+          <div class="col-lg-9">
+            <content id="feed" name="chat_feed">
+              <ul id=messages>
+              </ul>
+            </content>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row" style="position:absolute; bottom: 0px; width: 100%;">
+          <div class="col-lg-3"></div>
+          <div class="col-lg-9">
+              <form class="form-group" id="submit_comment_form">
+                <label for="message">Comment</label>
+                <textarea type="textarea" id="message" name="message" autocomplete="off" autofocus placeholder="Message" type="text" rows="3" width="100%"></textarea>
+                <input id="submit" type="submit">
+              </form>
+          </div>
+        </div>
+      </div>
+      {% else %}
+      <div class="container">
+        <h1>Login</h1>
+        <form type="login" method="post">
+            <input type="text"  name="username" placeholder="Username">
+            <input type="text" name="password" placeholder="Password">
+            <input type="submit" value="Login">
+        </form>
+      </div>
+      {% endif %}
+    </body>
+</html>
